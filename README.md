@@ -1,3 +1,5 @@
+
+
 # 문자열
 
 
@@ -39,7 +41,10 @@ input.map { $0.reversed() }.map { String($0) }.max()!
 
 - 문자열을 분리하여 배열로 나타낸다.
 - 주의점
-	- 공백을 기준으로 자를 때, 공백은 여러 개가 있더라도 결과는 같다.
+	- ⭐️문자를 자른 경우, `String.SubSequence` 타입이 되므로, 문자로 사용하고 싶은 경우 `String()`을 사용하자
+	- " "을 기준으로 자를 때, 공백은 여러 개가 있더라도 결과는 같다.
+	- "" 로 나눌 때는 공백도 갯수 만큼 그대로 표시된다.
+	- 공백을 기준으로 자를 때는 자신 이상의 공백은 동일하게 잘리며 자신보다 낮은 공백의 경우 자르지 않는다
 
 - `split(separator: "")`
 ```Swift
@@ -100,6 +105,7 @@ print(characterValue.asciiValue!)
 > `min() -> Self.Element`
 
 - 문자열에서도 최대값, 최소값을 구할 수 있다.
+	- (Tip!) 즉, 굳이 숫자 문자열 배열을 `Int` 나 `Double` 로 바꿀 필요가 없다!
 - 숫자인 문자 경우도 당연히 가능하다.
 - 주의점
 	- Optional
@@ -245,8 +251,8 @@ print(numbers)
 
 - 문자열의 마지막 Character 를 얻고 싶을 때 사용합니다.
 - 주의점
-	- `String.endIndex` 는 `String[]`으로 바로 접근할 수 없습니다.
-	- 예를 들어, 3자리 문자의 `endIndex`는 4를 의미합니다.
+	- ⭐️`String.endIndex` 는 `String[]`으로 바로 접근할 수 없습니다.
+		- 예를 들어, 3자리 문자의 `endIndex`는 4를 의미하기 때문입니다.
 
 ```Swift
 let hello = "안녕하세요"
@@ -301,7 +307,9 @@ let swift = myArr.joined()
 
 - 배열을 문자열로 바꿀 때 사용합니다.
 - 사이사이에 문자나 띄어쓰기를 하고 싶을 때 사용합니다.
-
+- 주의점
+	- 배열의 값이 Int 인 경우 불가능 하므로
+		- `myArr.map { String($0) }.joined(separator: " ")` 사용
 ```Swift
 let myArr = ["s", "w", "i", "f", "t"]
 
@@ -310,6 +318,21 @@ let swift = myArr.joined(separator: "-")
 // 결과값
 // s-w-i-f-t
 ```
+
+
+
+# Dictionary
+
+### Dictionary[key]
+
+```Swift
+let myDictionary = ["apple": 1]
+print(myDictionary["apple"])
+print
+```
+
+
+
 
 
 # 고차함수
@@ -355,3 +378,38 @@ print(a, b)
 // 결과값
 // [1, 2, 3] [2]
 ```
+
+
+# 숫자
+
+### pow(x,y)
+
+> `pow(_ x: Decimal, _ y: Int) -> Decimal`
+> `pow(_ lhs: Float, _ rhs: Float) -> Float`
+
+- 제곱값을 얻을 수 있다.
+- 주의점
+	- `import Foundation`
+	- Decimal 타입이기 때문에 x 에는 Int 타입을 사용할 수 없다.
+
+```Swift
+let a: I★nt = 2
+let b: Int = 3
+
+pow(Decimal(a), b)
+// 8
+
+let x: Float = 2.0
+let y: Float = 3.0
+
+pow(x,y)
+// 8
+```
+
+# 문자
+
+### AsciiValue
+
+
+- 문자 -> 숫자
+- 숫자 -> 문자
